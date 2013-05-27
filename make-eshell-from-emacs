@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export PACKAGE_TMP=/tmp/eshell-package-$$
+export EMACS_SRC_PATH=${EMACS_SRC_PATH:-~/emacs_bzr/trunk/lisp/eshell}
+
+export VERSION=0.0.1
+export TAR=eshell-$VERSION.tar
+
+mkdir -p $PACKAGE_TMP/eshell
+cp $EMACS_SRC_PATH/* $PACKAGE_TMP/eshell
+echo "(define-package eshell \"$VERSION\" \"The Emacs Shell.\")" >> $PACKAGE_TMP/eshell/eshell-pkg.el
+tar cvf $TAR -C $PACKAGE_TMP eshell
+
+# End

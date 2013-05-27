@@ -1,0 +1,65 @@
+= Eshell package maker =
+
+This is a script that makes an eshell package from the Emacs sources.
+
+=== Background ===
+
+Eshell is bundled with Emacs, it existed before packages were
+invented. But changes so eshell sometimes get locked inside Emacs
+releases. This makes it hard to test them and to distribute them
+widely.
+
+This script makes eshell packages from the Emacs source distribution
+so the eshell code can be independently tested and even distributed to
+other people.
+
+
+=== How it works ===
+
+Here's how:
+
+* check out the Emacs bzr sources with a 'trunk'
+* check out this repo
+* go:
+
+{{{
+$ make-eshell-from-emacs
+}}}
+
+* if you have a different trunk location from the one in the script go:
+
+{{{
+$ EMACS_SRC_PATH=/path/to/emacs/trunk make-eshell-from-emacs
+}}}
+
+this makes the {{{eshell-$VERSION.tar}}} file.
+
+=== To do ===
+
+Right now this is just a package maker script.
+
+We need:
+
+* to make the script more stable
+** you can specify an Emacs source location
+* where should we store $VERSION so that it is persistent?
+* add automatic testing via clean emacs dirs
+
+{{{
+(setq package-user-dir
+      (concat
+       default-directory
+       "elpa"))
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+        ("marmalade" . "http://marmalade-repo.org/packages/")))
+(package-initialize)
+(package-refresh-contents)
+(package-install-from-file 
+  (concat default-directory "eshell-0.0.1.tar"))
+(ert-run-tests-batch-and-exit "eshell.*")
+}}}
+
+* the version of eshell could be passed in as a command line argument to a script
+** or set as a variable with {{{--eval "(setq version \"$VERSION\")"}}}
+
