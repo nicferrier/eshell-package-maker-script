@@ -34,6 +34,19 @@ $ EMACS_SRC_PATH=/path/to/emacs/trunk make-eshell-from-emacs
 
 this makes the {{{eshell-$VERSION.tar}}} file.
 
+=== Testing ===
+
+Use the {{{test-package.el}}} to test the resulting package:
+
+{{{
+$ bash test-package.el eshell-0.0.1.tar
+}}}
+
+The //test-package// script will make a temporary ELPA directory and
+install the package in Emacs batch mode. 
+
+It will not affect your user's Emacs installation.
+
 === To do ===
 
 Right now this is just a package maker script.
@@ -43,20 +56,10 @@ We need:
 * to make the script more stable
 ** you can specify an Emacs source location
 * where should we store $VERSION so that it is persistent?
-* add automatic testing via clean emacs dirs
+* add automatic testing to the end of the script using {{{test-package.el}}}
+* we need to add ERT tests to eshell and then add this to the {{{test-package.el}}}
 
 {{{
-(setq package-user-dir
-      (concat
-       default-directory
-       "elpa"))
-(setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-        ("marmalade" . "http://marmalade-repo.org/packages/")))
-(package-initialize)
-(package-refresh-contents)
-(package-install-from-file 
-  (concat default-directory "eshell-0.0.1.tar"))
 (ert-run-tests-batch-and-exit "eshell.*")
 }}}
 
