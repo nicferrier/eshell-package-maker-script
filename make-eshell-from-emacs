@@ -5,10 +5,11 @@ export EMACS_SRC_PATH=${EMACS_SRC_PATH:-~/emacs_bzr/trunk/lisp/eshell}
 
 export VERSION=0.0.1
 export TAR=eshell-$VERSION.tar
+export ESHELL_PACKAGE=$PACKAGE_TMP/eshell-$VERSION
 
-mkdir -p $PACKAGE_TMP/eshell
-cp $EMACS_SRC_PATH/* $PACKAGE_TMP/eshell
-echo "(define-package eshell \"$VERSION\" \"The Emacs Shell.\")" >> $PACKAGE_TMP/eshell/eshell-pkg.el
-tar cvf $TAR -C $PACKAGE_TMP eshell
+mkdir -p $ESHELL_PACKAGE
+cp $EMACS_SRC_PATH/* $ESHELL_PACKAGE
+echo "(define-package eshell \"$VERSION\" \"The Emacs Shell.\")" >> $ESHELL_PACKAGE/eshell-pkg.el
+tar cvf $TAR -C $PACKAGE_TMP eshell-$VERSION
 
 # End
