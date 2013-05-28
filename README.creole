@@ -5,7 +5,7 @@ This is a script that makes an eshell package from the Emacs sources.
 === Background ===
 
 Eshell is bundled with Emacs, it existed before packages were
-invented. But changes so eshell sometimes get locked inside Emacs
+invented. But changes to eshell sometimes get locked inside Emacs
 releases. This makes it hard to test them and to distribute them
 widely.
 
