@@ -9,7 +9,7 @@ export ESHELL_PACKAGE=$PACKAGE_TMP/eshell-$VERSION
 
 mkdir -p $ESHELL_PACKAGE
 cp $EMACS_SRC_PATH/* $ESHELL_PACKAGE
-echo "(define-package eshell \"$VERSION\" \"The Emacs Shell.\")" >> $ESHELL_PACKAGE/eshell-pkg.el
+echo "(define-package \"eshell\" \"$VERSION\" \"The Emacs Shell.\")" >> $ESHELL_PACKAGE/eshell-pkg.el
 tar cvf $TAR -C $PACKAGE_TMP eshell-$VERSION
 
 # End
